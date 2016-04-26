@@ -293,8 +293,8 @@ var getGestureWeka = function () {
 
 var alerted = false;
 var oldGesture;
-var gestureArr = new Array(10);
-// Length of gestureArr is 10
+var gestureArr = new Array(15);
+// Length of gestureArr is 15
 
 var checkStable = function (gestureNum) {
   gestureArr.shift();
@@ -314,16 +314,17 @@ var checkStable = function (gestureNum) {
 
 var checkAllVals = function () {
   var gesture = getGestureWeka();
-  // console.log(gesture);
 
   if (!alerted && !checkStable(gesture)) {
     return;
   }
 
+  // if (!alerted && (oldGesture != gesture)    ) {
   if (!alerted) {
     if (gesture > 0) {
       alerted = true;
       oldGesture = gesture;
+
       if (gesture == 1) {
         window.open("http://hcii.cmu.edu");
         window.open("http://cmu.edu");

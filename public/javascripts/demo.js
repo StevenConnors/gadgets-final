@@ -336,11 +336,12 @@ var checkAllVals = function () {
       if (gesture == 4) {
         document.getElementById("action").innerHTML = "Grasp action was done";
       }
+      sleep(1000);
     }
   } else {
     if (gesture == 0) {
       alerted = false;
-      document.getElementById("action").innerHTML = "No actions done yet";
+      // document.getElementById("action").innerHTML = "No actions done yet";
     }
   }
 }

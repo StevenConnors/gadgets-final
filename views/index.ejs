@@ -13,7 +13,7 @@
         width: auto;
         height: 280px;
         margin: auto;
-        padding-top: 140px;
+        padding-top: 200px;
         text-align: center;
         border-style: solid;
         border-width: 10px;
@@ -27,6 +27,32 @@
     <h2><a href="/wristgraph"> Wrist Graph </a></h2>
     <h2><a href="/demo"> Demo </a></h2>
     <h2><a href="/fulldemo"> Full Demo </a></h2>
+
+    <br>
+    <h2> by Steven Connors - scconnor</h2>
+    <h2> About this project - aka my presentation notes</h2>
+    <h4> Components Used</h4>
+      <ul> Arduino Nano</ul>
+      <ul> HC-05 Bluetooth Module</ul>
+      <ul> 35mm Piezo Sensor</ul>
+      <ul> 1 mega ohm resistor</ul>
+      <ul> 3d printed wrist attachment</ul>
+
+    <h4> Purpose </h4>
+      <ul> Do stuff using these piezos & gesture recognition</ul>
+
+    <h4> How this works </h4>
+      <ul> Arduino collects & sends piezo sensor data over bluetooth to webserver </ul>
+      <ul> Webserver processes the data and smoothens it out</ul>
+      <ul> Webserver sends the result to the client browser via websockets</ul>
+      <ul> Client displays the data</ul>
+      <ul> If gesture is recognized, client will tell the webserver to do stuff </ul>
+      <br>
+      <ul> Gesture data was collected and analyzed via Weka J48 algorithm</ul>
+      <ul> Weka results: </ul>
+      <ul>Correctly Classified Instances        1529               91.1747 % </ul>
+      <ul>Incorrectly Classified Instances       148                8.8253 % </ul>
+      <ul>Kappa statistic                          0.8876 </ul>
 
   </body>
 </html>
