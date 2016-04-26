@@ -12,7 +12,8 @@ var io = require('socket.io')(server);
 
 
 // Routes for socketio & regular routes
-var socket_routes = require('./routes/socket-routes.js')(io);
+// var socket_routes = require('./routes/socket-routes.js')(io);
+var log_routes = require('./routes/log-routes.js')(io);
 
 var routes = require('./routes/index');
 app.use('/', routes);

@@ -21,7 +21,6 @@
 
 
 
-
     <script type="text/javascript">
 
       var socket = io.connect();
@@ -58,10 +57,11 @@
             alerted = true;
 
             if (tappedA) {
-                var popup = window.open("http://hcii.cmu.edu");
-                var popup = window.open("http://netflix.com");
-                var popup = window.open("http://gmail.com");
-                var popup = window.open("http://facebook.com");
+                
+                window.open("http://hcii.cmu.edu");
+                window.open("http://netflix.com");
+                window.open("http://gmail.com");
+                window.open("http://facebook.com");
 
                 socket.emit('doActionA', { 
                 
@@ -90,7 +90,118 @@
         }
       }
 
-
+// attribute_1 <= 2.8
+// |   attribute_2 <= 13.6
+// |   |   attribute_3 <= 5
+// |   |   |   attribute_2 <= 3.5
+// |   |   |   |   attribute_1 <= 0.1
+// |   |   |   |   |   attribute_1 <= 0
+// |   |   |   |   |   |   attribute_2 <= 0
+// |   |   |   |   |   |   |   attribute_3 <= 0.5
+// |   |   |   |   |   |   |   |   attribute_3 <= 0.1: nothing (61.0/11.0)
+// |   |   |   |   |   |   |   |   attribute_3 > 0.1
+// |   |   |   |   |   |   |   |   |   attribute_3 <= 0.2: tapB (5.0)
+// |   |   |   |   |   |   |   |   |   attribute_3 > 0.2: nothing (14.0/3.0)
+// |   |   |   |   |   |   |   attribute_3 > 0.5: nothing (11.0)
+// |   |   |   |   |   |   attribute_2 > 0: nothing (21.0)
+// |   |   |   |   |   attribute_1 > 0
+// |   |   |   |   |   |   attribute_3 <= 0.8: nothing (41.0/10.0)
+// |   |   |   |   |   |   attribute_3 > 0.8: tapB (2.0)
+// |   |   |   |   attribute_1 > 0.1
+// |   |   |   |   |   attribute_1 <= 1.1: nothing (183.0/7.0)
+// |   |   |   |   |   attribute_1 > 1.1
+// |   |   |   |   |   |   attribute_3 <= 1.2
+// |   |   |   |   |   |   |   attribute_3 <= 0
+// |   |   |   |   |   |   |   |   attribute_1 <= 1.8: nothing (4.0)
+// |   |   |   |   |   |   |   |   attribute_1 > 1.8: tapC (4.0/1.0)
+// |   |   |   |   |   |   |   attribute_3 > 0: nothing (31.0/3.0)
+// |   |   |   |   |   |   attribute_3 > 1.2: tapA (5.0/1.0)
+// |   |   |   attribute_2 > 3.5
+// |   |   |   |   attribute_1 <= 1.1
+// |   |   |   |   |   attribute_1 <= 0.4: tapB (7.0)
+// |   |   |   |   |   attribute_1 > 0.4
+// |   |   |   |   |   |   attribute_1 <= 0.9
+// |   |   |   |   |   |   |   attribute_1 <= 0.7
+// |   |   |   |   |   |   |   |   attribute_1 <= 0.6: nothing (2.0)
+// |   |   |   |   |   |   |   |   attribute_1 > 0.6
+// |   |   |   |   |   |   |   |   |   attribute_2 <= 10.4: Grasp (2.0/1.0)
+// |   |   |   |   |   |   |   |   |   attribute_2 > 10.4: nothing (2.0)
+// |   |   |   |   |   |   |   attribute_1 > 0.7: tapB (2.0)
+// |   |   |   |   |   |   attribute_1 > 0.9: nothing (7.0/1.0)
+// |   |   |   |   attribute_1 > 1.1: Grasp (6.0)
+// |   |   attribute_3 > 5
+// |   |   |   attribute_3 <= 30.6
+// |   |   |   |   attribute_1 <= 1.8: Grasp (4.0)
+// |   |   |   |   attribute_1 > 1.8: tapC (2.0)
+// |   |   |   attribute_3 > 30.6: tapC (34.0)
+// |   attribute_2 > 13.6: tapB (140.0/1.0)
+// attribute_1 > 2.8
+// |   attribute_3 <= 31.8
+// |   |   attribute_2 <= 18.9
+// |   |   |   attribute_3 <= 6.5
+// |   |   |   |   attribute_1 <= 11.9
+// |   |   |   |   |   attribute_2 <= 4.2
+// |   |   |   |   |   |   attribute_3 <= 0.2: tapC (7.0)
+// |   |   |   |   |   |   attribute_3 > 0.2: tapA (29.0/3.0)
+// |   |   |   |   |   attribute_2 > 4.2
+// |   |   |   |   |   |   attribute_3 <= 2.1
+// |   |   |   |   |   |   |   attribute_3 <= 0.7: Grasp (14.0)
+// |   |   |   |   |   |   |   attribute_3 > 0.7
+// |   |   |   |   |   |   |   |   attribute_2 <= 9.6: Grasp (3.0)
+// |   |   |   |   |   |   |   |   attribute_2 > 9.6
+// |   |   |   |   |   |   |   |   |   attribute_2 <= 10.5: tapA (2.0)
+// |   |   |   |   |   |   |   |   |   attribute_2 > 10.5: Grasp (2.0)
+// |   |   |   |   |   |   attribute_3 > 2.1: tapB (3.0/1.0)
+// |   |   |   |   attribute_1 > 11.9: tapA (255.0/1.0)
+// |   |   |   attribute_3 > 6.5
+// |   |   |   |   attribute_1 <= 58
+// |   |   |   |   |   attribute_1 <= 4.6
+// |   |   |   |   |   |   attribute_2 <= 4.9: tapC (5.0)
+// |   |   |   |   |   |   attribute_2 > 4.9: Grasp (2.0/1.0)
+// |   |   |   |   |   attribute_1 > 4.6
+// |   |   |   |   |   |   attribute_3 <= 13.3
+// |   |   |   |   |   |   |   attribute_1 <= 6.8: tapB (6.0)
+// |   |   |   |   |   |   |   attribute_1 > 6.8: Grasp (15.0/1.0)
+// |   |   |   |   |   |   attribute_3 > 13.3
+// |   |   |   |   |   |   |   attribute_3 <= 27: tapB (37.0)
+// |   |   |   |   |   |   |   attribute_3 > 27
+// |   |   |   |   |   |   |   |   attribute_1 <= 8.2: Grasp (2.0)
+// |   |   |   |   |   |   |   |   attribute_1 > 8.2: tapB (10.0/1.0)
+// |   |   |   |   attribute_1 > 58: tapA (11.0)
+// |   |   attribute_2 > 18.9
+// |   |   |   attribute_3 <= 2.5
+// |   |   |   |   attribute_1 <= 6.2
+// |   |   |   |   |   attribute_2 <= 51.9: Grasp (3.0)
+// |   |   |   |   |   attribute_2 > 51.9: tapB (3.0)
+// |   |   |   |   attribute_1 > 6.2: Grasp (99.0)
+// |   |   |   attribute_3 > 2.5
+// |   |   |   |   attribute_1 <= 41.3
+// |   |   |   |   |   attribute_3 <= 14
+// |   |   |   |   |   |   attribute_1 <= 10.8: tapB (32.0/7.0)
+// |   |   |   |   |   |   attribute_1 > 10.8
+// |   |   |   |   |   |   |   attribute_2 <= 30.2: tapB (3.0)
+// |   |   |   |   |   |   |   attribute_2 > 30.2: Grasp (10.0)
+// |   |   |   |   |   attribute_3 > 14: tapB (122.0/7.0)
+// |   |   |   |   attribute_1 > 41.3
+// |   |   |   |   |   attribute_2 <= 69.6: tapA (6.0/1.0)
+// |   |   |   |   |   attribute_2 > 69.6: Grasp (19.0)
+// |   attribute_3 > 31.8
+// |   |   attribute_2 <= 7.7
+// |   |   |   attribute_1 <= 35.9
+// |   |   |   |   attribute_3 <= 590.7
+// |   |   |   |   |   attribute_1 <= 7.7
+// |   |   |   |   |   |   attribute_1 <= 5.5
+// |   |   |   |   |   |   |   attribute_2 <= 1.1: Grasp (2.0)
+// |   |   |   |   |   |   |   attribute_2 > 1.1: tapC (48.0/6.0)
+// |   |   |   |   |   |   attribute_1 > 5.5
+// |   |   |   |   |   |   |   attribute_3 <= 368.1: Grasp (12.0)
+// |   |   |   |   |   |   |   attribute_3 > 368.1
+// |   |   |   |   |   |   |   |   attribute_2 <= 1.2: Grasp (2.0)
+// |   |   |   |   |   |   |   |   attribute_2 > 1.2: tapC (2.0)
+// |   |   |   |   |   attribute_1 > 7.7: tapC (84.0/8.0)
+// |   |   |   |   attribute_3 > 590.7: Grasp (9.0)
+// |   |   |   attribute_1 > 35.9: Grasp (21.0)
+// |   |   attribute_2 > 7.7: Grasp (207.0)
 
 
     </script>

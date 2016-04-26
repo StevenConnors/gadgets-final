@@ -1,0 +1,168 @@
+=== Run information ===
+
+Scheme:weka.classifiers.trees.J48 -U -M 2
+Relation:     testnothing
+Instances:    1677
+Attributes:   4
+              attribute_1
+              attribute_2
+              attribute_3
+              attribute_4
+Test mode:10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 unpruned tree
+------------------
+
+attribute_1 <= 2.8
+|   attribute_2 <= 13.6
+|   |   attribute_3 <= 5
+|   |   |   attribute_2 <= 3.5
+|   |   |   |   attribute_1 <= 0.1
+|   |   |   |   |   attribute_1 <= 0
+|   |   |   |   |   |   attribute_2 <= 0
+|   |   |   |   |   |   |   attribute_3 <= 0.5
+|   |   |   |   |   |   |   |   attribute_3 <= 0.1: nothing (61.0/11.0)
+|   |   |   |   |   |   |   |   attribute_3 > 0.1
+|   |   |   |   |   |   |   |   |   attribute_3 <= 0.2: tapB (5.0)
+|   |   |   |   |   |   |   |   |   attribute_3 > 0.2: nothing (14.0/3.0)
+|   |   |   |   |   |   |   attribute_3 > 0.5: nothing (11.0)
+|   |   |   |   |   |   attribute_2 > 0: nothing (21.0)
+|   |   |   |   |   attribute_1 > 0
+|   |   |   |   |   |   attribute_3 <= 0.8: nothing (41.0/10.0)
+|   |   |   |   |   |   attribute_3 > 0.8: tapB (2.0)
+|   |   |   |   attribute_1 > 0.1
+|   |   |   |   |   attribute_1 <= 1.1: nothing (183.0/7.0)
+|   |   |   |   |   attribute_1 > 1.1
+|   |   |   |   |   |   attribute_3 <= 1.2
+|   |   |   |   |   |   |   attribute_3 <= 0
+|   |   |   |   |   |   |   |   attribute_1 <= 1.8: nothing (4.0)
+|   |   |   |   |   |   |   |   attribute_1 > 1.8: tapC (4.0/1.0)
+|   |   |   |   |   |   |   attribute_3 > 0: nothing (31.0/3.0)
+|   |   |   |   |   |   attribute_3 > 1.2: tapA (5.0/1.0)
+|   |   |   attribute_2 > 3.5
+|   |   |   |   attribute_1 <= 1.1
+|   |   |   |   |   attribute_1 <= 0.4: tapB (7.0)
+|   |   |   |   |   attribute_1 > 0.4
+|   |   |   |   |   |   attribute_1 <= 0.9
+|   |   |   |   |   |   |   attribute_1 <= 0.7
+|   |   |   |   |   |   |   |   attribute_1 <= 0.6: nothing (2.0)
+|   |   |   |   |   |   |   |   attribute_1 > 0.6
+|   |   |   |   |   |   |   |   |   attribute_2 <= 10.4: Grasp (2.0/1.0)
+|   |   |   |   |   |   |   |   |   attribute_2 > 10.4: nothing (2.0)
+|   |   |   |   |   |   |   attribute_1 > 0.7: tapB (2.0)
+|   |   |   |   |   |   attribute_1 > 0.9: nothing (7.0/1.0)
+|   |   |   |   attribute_1 > 1.1: Grasp (6.0)
+|   |   attribute_3 > 5
+|   |   |   attribute_3 <= 30.6
+|   |   |   |   attribute_1 <= 1.8: Grasp (4.0)
+|   |   |   |   attribute_1 > 1.8: tapC (2.0)
+|   |   |   attribute_3 > 30.6: tapC (34.0)
+|   attribute_2 > 13.6: tapB (140.0/1.0)
+attribute_1 > 2.8
+|   attribute_3 <= 31.8
+|   |   attribute_2 <= 18.9
+|   |   |   attribute_3 <= 6.5
+|   |   |   |   attribute_1 <= 11.9
+|   |   |   |   |   attribute_2 <= 4.2
+|   |   |   |   |   |   attribute_3 <= 0.2: tapC (7.0)
+|   |   |   |   |   |   attribute_3 > 0.2: tapA (29.0/3.0)
+|   |   |   |   |   attribute_2 > 4.2
+|   |   |   |   |   |   attribute_3 <= 2.1
+|   |   |   |   |   |   |   attribute_3 <= 0.7: Grasp (14.0)
+|   |   |   |   |   |   |   attribute_3 > 0.7
+|   |   |   |   |   |   |   |   attribute_2 <= 9.6: Grasp (3.0)
+|   |   |   |   |   |   |   |   attribute_2 > 9.6
+|   |   |   |   |   |   |   |   |   attribute_2 <= 10.5: tapA (2.0)
+|   |   |   |   |   |   |   |   |   attribute_2 > 10.5: Grasp (2.0)
+|   |   |   |   |   |   attribute_3 > 2.1: tapB (3.0/1.0)
+|   |   |   |   attribute_1 > 11.9: tapA (255.0/1.0)
+|   |   |   attribute_3 > 6.5
+|   |   |   |   attribute_1 <= 58
+|   |   |   |   |   attribute_1 <= 4.6
+|   |   |   |   |   |   attribute_2 <= 4.9: tapC (5.0)
+|   |   |   |   |   |   attribute_2 > 4.9: Grasp (2.0/1.0)
+|   |   |   |   |   attribute_1 > 4.6
+|   |   |   |   |   |   attribute_3 <= 13.3
+|   |   |   |   |   |   |   attribute_1 <= 6.8: tapB (6.0)
+|   |   |   |   |   |   |   attribute_1 > 6.8: Grasp (15.0/1.0)
+|   |   |   |   |   |   attribute_3 > 13.3
+|   |   |   |   |   |   |   attribute_3 <= 27: tapB (37.0)
+|   |   |   |   |   |   |   attribute_3 > 27
+|   |   |   |   |   |   |   |   attribute_1 <= 8.2: Grasp (2.0)
+|   |   |   |   |   |   |   |   attribute_1 > 8.2: tapB (10.0/1.0)
+|   |   |   |   attribute_1 > 58: tapA (11.0)
+|   |   attribute_2 > 18.9
+|   |   |   attribute_3 <= 2.5
+|   |   |   |   attribute_1 <= 6.2
+|   |   |   |   |   attribute_2 <= 51.9: Grasp (3.0)
+|   |   |   |   |   attribute_2 > 51.9: tapB (3.0)
+|   |   |   |   attribute_1 > 6.2: Grasp (99.0)
+|   |   |   attribute_3 > 2.5
+|   |   |   |   attribute_1 <= 41.3
+|   |   |   |   |   attribute_3 <= 14
+|   |   |   |   |   |   attribute_1 <= 10.8: tapB (32.0/7.0)
+|   |   |   |   |   |   attribute_1 > 10.8
+|   |   |   |   |   |   |   attribute_2 <= 30.2: tapB (3.0)
+|   |   |   |   |   |   |   attribute_2 > 30.2: Grasp (10.0)
+|   |   |   |   |   attribute_3 > 14: tapB (122.0/7.0)
+|   |   |   |   attribute_1 > 41.3
+|   |   |   |   |   attribute_2 <= 69.6: tapA (6.0/1.0)
+|   |   |   |   |   attribute_2 > 69.6: Grasp (19.0)
+|   attribute_3 > 31.8
+|   |   attribute_2 <= 7.7
+|   |   |   attribute_1 <= 35.9
+|   |   |   |   attribute_3 <= 590.7
+|   |   |   |   |   attribute_1 <= 7.7
+|   |   |   |   |   |   attribute_1 <= 5.5
+|   |   |   |   |   |   |   attribute_2 <= 1.1: Grasp (2.0)
+|   |   |   |   |   |   |   attribute_2 > 1.1: tapC (48.0/6.0)
+|   |   |   |   |   |   attribute_1 > 5.5
+|   |   |   |   |   |   |   attribute_3 <= 368.1: Grasp (12.0)
+|   |   |   |   |   |   |   attribute_3 > 368.1
+|   |   |   |   |   |   |   |   attribute_2 <= 1.2: Grasp (2.0)
+|   |   |   |   |   |   |   |   attribute_2 > 1.2: tapC (2.0)
+|   |   |   |   |   attribute_1 > 7.7: tapC (84.0/8.0)
+|   |   |   |   attribute_3 > 590.7: Grasp (9.0)
+|   |   |   attribute_1 > 35.9: Grasp (21.0)
+|   |   attribute_2 > 7.7: Grasp (207.0)
+
+Number of Leaves  :     57
+
+Size of the tree :  113
+
+
+Time taken to build model: 0.04 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1529               91.1747 %
+Incorrectly Classified Instances       148                8.8253 %
+Kappa statistic                          0.8876
+Mean absolute error                      0.0456
+Root mean squared error                  0.1736
+Relative absolute error                 14.5627 %
+Root relative squared error             43.8756 %
+Total Number of Instances             1677     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.876     0.026      0.93      0.876     0.902      0.963    Grasp
+                 0.965     0.037      0.871     0.965     0.915      0.983    nothing
+                 0.967     0.009      0.958     0.967     0.962      0.987    tapA
+                 0.861     0.021      0.925     0.861     0.892      0.965    tapB
+                 0.919     0.019      0.849     0.919     0.883      0.975    tapC
+Weighted Avg.    0.912     0.023      0.914     0.912     0.912      0.973
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   <-- classified as
+ 411  10   6  18  24 |   a = Grasp
+   3 330   2   6   1 |   b = nothing
+   3   4 295   2   1 |   c = tapA
+  17  31   4 335   2 |   d = tapB
+   8   4   1   1 158 |   e = tapC
+

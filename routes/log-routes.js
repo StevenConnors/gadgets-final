@@ -3,6 +3,12 @@ var robot = require("robotjs");
 var serialport = require('serialport');
 var SerialPort = require("serialport").SerialPort;
 
+
+var fs = require('fs');
+
+
+
+
 try {
   var port = new SerialPort("/dev/tty.HC-05-DevB", {
     parser: serialport.parsers.readline('\n')
@@ -52,20 +58,46 @@ module.exports = function (io) {
   io.on('connection', function (socket) {
     socket.on('doActionA', function () {
         console.log("AAAAAAAAAAAAA");
+
+        var streamA = fs.createWriteStream("logA.txt");
+        streamA.once('open', function(fd) {
+          streamA.write(logA);
+          streamA.end();
+        });
+
+        var streamB = fs.createWriteStream("logB.txt");
+        streamB.once('open', function(fd) {
+          streamB.write(logB);
+          streamB.end();
+        });
+        var streamC = fs.createWriteStream("logC.txt");
+        streamC.once('open', function(fd) {
+          streamC.write(logC);
+          streamC.end();
+        });
+
+
     });
 
     socket.on('doActionB', function () {
       console.log("BBBBBBBBBBBBBBBB");
-      typeLorem();
+
+
+
+
     });
 
     socket.on('doActionC', function () {
       console.log("CCCCCCCCCCCCCCCCC");
-      moveMouse();
     });
   });
 
 
+
+
+  var logA = "";
+  var logB = "";
+  var logC = "";
 
 
   port.on('open', function(err) {
@@ -88,55 +120,33 @@ module.exports = function (io) {
           sensorVal : data,
           num : averageVal
         });
+        logA = logA + averageVal + "\n";
+
+
       } else if (firstLetter == "B") {
         io.emit('sensorB', {
           sensorVal : data,
           num : averageVal
         });
+        logB = logB + averageVal + "\n";
+
       } else if (firstLetter == "C") {
         io.emit('sensorC', {
           sensorVal : data,
           num : num
         });
+        logC = logC + averageVal + "\n";
       }
+
+
     });
   });
 
 
 
 
+
+
 }
 // End socketio
-
-
-
-// Gesture Actions
-
-var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet hendrerit ipsum, eu maximus sem porta a.";
-
-var typeLorem = function () {
-    //Type "Hello World".
-    robot.typeString(lorem);
-
-    //Press enter. 
-    robot.keyTap("enter");
-}
-
-
-var moveMouse = function () {
-    //Speed up the mouse.
-    robot.setMouseDelay(2);
-
-    var twoPI = Math.PI * 2.0;
-    var screenSize = robot.getScreenSize();
-    var height = (screenSize.height / 2) - 10;
-    var width = screenSize.width;
-
-    for (var x = 0; x < width; x++)
-    {
-        y = height * Math.sin((twoPI * x) / width) + height;
-        robot.moveMouse(x, y);
-    }
-}
-
 
