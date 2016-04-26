@@ -1,75 +1,24 @@
-<!-- int[] xvals;
-int[] yvals;
-int[] bvals;
-
-void setup() 
-{
-  size(640, 360);
-  noSmooth();
-  xvals = new int[width];
-  yvals = new int[width];
-  bvals = new int[width];
-}
-
-int arrayindex = 0;
-
-void draw()
-{
-  background(102);
-  
-  for(int i = 1; i < width; i++) { 
-    xvals[i-1] = xvals[i]; 
-    yvals[i-1] = yvals[i];
-    bvals[i-1] = bvals[i];
-  } 
-  // Add the new values to the end of the array 
-  xvals[width-1] = mouseX; 
-  yvals[width-1] = mouseY;
-  if(mousePressed) {
-    bvals[width-1] = 0;
-  } else {
-    bvals[width-1] = 255;
-  }
-  
-  fill(255);
-  noStroke();
-  rect(0, height/3, width, height/3+1);
-
-  for(int i=1; i<width; i++) {
-    stroke(255);
-    point(i, xvals[i]/3);
-    stroke(0);
-    point(i, height/3+yvals[i]/3);
-    stroke(255);
-    line(i, 2*height/3+bvals[i]/3, i, (2*height/3+bvals[i-1]/3));
-  }
-} -->
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <title><%= title %></title>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.js"></script>
-    <script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js"></script>
 
-    </script>
   </head>
   <body>
-    <h1><%= title %></h1>
+
     <p>Welcome to <%= title %></p>
     <h3 id='piezoValA'>A </h3> <h3 id="piezoAvgA"> </h3>
     <h3 id='piezoValB'>B </h3> <h3 id="piezoAvgB"> </h3>
     <h3 id='piezoValC'>C </h3> <h3 id="piezoAvgC"> </h3>
 
 
-    <script type="text/javascript">
-    // window.location = "http://www.cmu.edu";
 
+    <script type="text/javascript">
 
       var socket = io.connect();
-      var originDate = new Date();
       var allVals = [0, 0, 0];
 
       var threshold = 300;
@@ -78,7 +27,7 @@ void draw()
         // data.sensorVal is in the form X: ###
         document.getElementById("piezoAvgA").innerHTML = data.num;
         allVals[0] = data.num;
-        checkAllVals();
+        // checkAllVals();
       });
 
       socket.on('sensorB', function (data) {
@@ -92,24 +41,54 @@ void draw()
       });
 
 
-      var alerted = false;
+        var width = 10;
+        var xvals = [];
+        var yvals = [];
+        var bvals = [];
 
-      var checkAllVals = function () {
-        var tappedA = allVals[0] > threshold;
-        var tappedB = allVals[1] > threshold;
-        var tappedC = allVals[2] > threshold;
+        function setup() 
+        {
+          createCanvas(840, 480);
+          // noSmooth();
+          xvals = new Array(width);
+          yvals = new Array(width);
+          bvals = new Array(width);
+        }
 
-        if (!alerted) {
-          if (tappedA || tappedB || tappedC) {
-            alert("A:" +tappedA +"\n B:" + tappedB + "\n C:" +tappedC);
-            alerted = true;
-          }
-        } else {
-          if (!tappedA && !tappedB && !tappedC) {
-            alerted = false;
+        var arrayindex = 0;
+
+        function draw()
+        {
+          background(102);
+          
+          for(var i = 1; i < width; i++) { 
+            xvals[i-1] = xvals[i]; 
+            yvals[i-1] = yvals[i];
+            bvals[i-1] = bvals[i];
+          } 
+          // Add the new values to the end of the array 
+          xvals[width-1] = allVals[0]; 
+          yvals[width-1] = allVals[1];
+          bvals[width-1] = allVals[2];
+
+
+          fill(255);
+          noStroke();
+          rect(0, height/3, width, height/3+1);
+
+          for(var i=1; i<width; i++) {
+            stroke(255);
+            point(i, xvals[i]/3);
+            stroke(0);
+            point(i, height/3+yvals[i]/3);
+            stroke(255);
+            point(i, 2*height/3+bvals[i]/3);
           }
         }
-      }
+
+
+
+
 
 
     </script>

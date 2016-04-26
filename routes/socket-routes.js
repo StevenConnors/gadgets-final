@@ -3,23 +3,20 @@ var robot = require("robotjs");
 var serialport = require('serialport');
 var SerialPort = require("serialport").SerialPort;
 
-// var port = new SerialPort("/dev/tty.usbmodem1411", {
-//   parser: serialport.parsers.readline('\n')
-// });
-var port = new SerialPort("/dev/tty.HC-05-DevB", {
-  parser: serialport.parsers.readline('\n')
-});
-// /dev/tty.wchusbserial1410
+try {
+  var port = new SerialPort("/dev/tty.HC-05-DevB", {
+    parser: serialport.parsers.readline('\n')
+  });
+} catch(error) {
+  console.log("Port not ready/doesn't exist!");
+}
 
-// Max length of the running average array is 6
-var averageArrayA = [0, 0, 0, 0, 0, 0];
-var averageArrayB = [0, 0, 0, 0, 0, 0];
-var averageArrayC = [0, 0, 0, 0, 0, 0];
+// Max length of the running average array is 10
+var averageArrayA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var averageArrayB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var averageArrayC = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 var threshold = 300;
-
-
-
 
 var shiftAverage = function (firstLetter, val) {
   var arr = averageArrayA;
@@ -45,40 +42,19 @@ var getAverage = function (arr) {
   return avg / arr.length;
 }
 
-var actionDone = false;
 
-var doAction = function (firstLetter, averageVal) {
-  if (firstLetter == "A" && averageVal > threshold && !actionDone) {
-    shutdown();
-    actionDone = true;
-  }
+var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet hendrerit ipsum, eu maximus sem porta a.";
 
-  checkEverythingNormal();
-}
-
-
-var checkEverythingNormal = function () {
-  var avgA = getAverage(averageArrayA);
-  var avgB = getAverage(averageArrayB);
-  var avgC = getAverage(averageArrayC);
-
-  if (avgA < threshold && avgB < threshold && avgC < threshold) {
-    actionDone = false;
-  }
-}
-
-
-
-var typeHelloWorld = function () {
+var typeLorem = function () {
     //Type "Hello World".
-    robot.typeString("Hello World");
+    robot.typeString(lorem);
 
     //Press enter. 
     robot.keyTap("enter");
 }
 
 
-var shutdown = function () {
+var moveMouse = function () {
     //Speed up the mouse.
     robot.setMouseDelay(2);
 
@@ -104,13 +80,32 @@ var shutdown = function () {
 
 module.exports = function (io) {
   io.on('connection', function (socket) {
+    socket.on('doActionA', function () {
+        console.log("AAAAAAAAAAAAA");
+    });
 
+    socket.on('doActionB', function () {
+      console.log("BBBBBBBBBBBBBBBB");
+      typeLorem();
+    });
 
+    socket.on('doActionC', function () {
+      console.log("CCCCCCCCCCCCCCCCC");
+      moveMouse();
+    });
   });
 
 
-  port.on('open', function() {
+
+
+
+  port.on('open', function(err) {
+    if (err) {
+      console.log('Error opening port: ', err.message);
+      return;
+    }
     console.log('Serial Port Opend');
+
 
     port.on('data', function(data){
       // data is in form 'X: ###' 
@@ -136,9 +131,13 @@ module.exports = function (io) {
         });
       }
 
-      doAction(firstLetter, averageVal);
-
     });
+
+
+    port.on('close', function () {
+      console.log("Serial Port Closed");
+    });
+
   });
 
 }
