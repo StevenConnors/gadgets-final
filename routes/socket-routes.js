@@ -1,5 +1,6 @@
-var robot = require("robotjs");
+// Set up dependencies
 
+var robot = require("robotjs");
 var serialport = require('serialport');
 var SerialPort = require("serialport").SerialPort;
 
@@ -11,13 +12,17 @@ try {
   console.log("Port not ready/doesn't exist!");
 }
 
+//////////////////////////////////////////
+// Running Average Filter methods
+//////////////////////////////////////////
+
 // Max length of the running average array is 10
 var averageArrayA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var averageArrayB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var averageArrayC = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-var threshold = 300;
 
+// Add another element to the running filter, and return the average
 var shiftAverage = function (firstLetter, val) {
   var arr = averageArrayA;
   if (firstLetter == "A") {
@@ -34,6 +39,7 @@ var shiftAverage = function (firstLetter, val) {
   return getAverage(arr);
 }
 
+// Gets average of an array
 var getAverage = function (arr) {
   var avg = 0;
   for (var i = 0; i < arr.length; i++) {
@@ -43,30 +49,32 @@ var getAverage = function (arr) {
 }
 
 
-
-
-
-
-
 module.exports = function (io) {
+  //////////////////////////////////////
+  // Socket.io stuff
+  //////////////////////////////////////
   io.on('connection', function (socket) {
+
     socket.on('doActionA', function () {
-        console.log("AAAAAAAAAAAAA");
+        console.log("Doing action A");
     });
 
     socket.on('doActionB', function () {
-      console.log("BBBBBBBBBBBBBBBB");
+      console.log("Doing action B");
       typeLorem();
     });
 
     socket.on('doActionC', function () {
-      console.log("CCCCCCCCCCCCCCCCC");
+      console.log("Doing action C");
       moveMouse();
     });
+
   });
 
 
-
+  ///////////////////////////////////////
+  // Arduino stuff
+  ///////////////////////////////////////
 
   port.on('open', function(err) {
     if (err) {
@@ -77,7 +85,8 @@ module.exports = function (io) {
 
 
     port.on('data', function(data){
-      // data is in form 'X: ###' 
+      // data comes in form 'X: ###' 
+      // We have 3 sensors, so A,B,C respectively
       var firstLetter = data.charAt(0);
       var num = parseInt(data.substr(3, data.length - 1));
 
@@ -101,16 +110,11 @@ module.exports = function (io) {
       }
     });
   });
-
-
-
-
 }
-// End socketio
 
-
-
-// Gesture Actions
+///////////////////////////////////
+// Gesture Methods 
+//////////////////////////////////
 
 var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet hendrerit ipsum, eu maximus sem porta a.";
 
@@ -121,7 +125,6 @@ var typeLorem = function () {
     //Press enter. 
     robot.keyTap("enter");
 }
-
 
 var moveMouse = function () {
     //Speed up the mouse.

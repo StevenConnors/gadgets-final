@@ -12,8 +12,11 @@ var io = require('socket.io')(server);
 
 
 // Routes for socketio & regular routes
-// var socket_routes = require('./routes/socket-routes.js')(io);
-var log_routes = require('./routes/log-routes.js')(io);
+var socket_routes = require('./routes/socket-routes.js')(io);
+
+// This was used to log data from the arduino into a csv file for Weka. 
+// Commented out as we don't need to use it regularly
+// var log_routes = require('./routes/log-routes.js')(io);
 
 var routes = require('./routes/index');
 app.use('/', routes);
@@ -65,9 +68,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-
 
 
 
