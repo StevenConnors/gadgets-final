@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.js"></script>
+    <script>
+
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <h3 id='piezoValA'> </h3>
+    <h3 id='piezoValB'> </h3>
+
+
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script type="text/javascript">
+
+
+        var socket = io.connect();
+        
+        var lineChartData = {
+          labels : ["0","1","2","3","4","5","6","7","8","9","10", "11", "12","13","0","1","2","3","4","5","6","7","8","9","10", "11", "12","13"],
+          datasets : [
+            {
+              fillColor : "rgba(151,187,205,0.5)",
+              strokeColor : "rgba(151,187,205,1)",
+              pointColor : "rgba(151,187,205,1)",
+              pointStrokeColor : "#fff",
+              data : [65,59,90,81,56,55,40,65,59,90,81,56,55,40,65,59,90,81,56,55,40,65,59,90,81,56,55,40]
+            }
+          ]
+        };
+        
+        socket.on('sensorA', function (data) {
+          document.getElementById("piezoValA").innerHTML = data.sensorVal;
+          var num = parseInt(data.sensorVal.substr(3, data.sensorVal.length - 1));
+
+          lineChartData.datasets[0].data.shift();
+          lineChartData.datasets[0].data.push(num);
+          
+          initLine();
+        });
+        
+        initLine = function() {
+          var options = {
+            animation : false,
+            scaleOverride : true,
+            scaleSteps : 10,//Number - The number of steps in a hard coded scale
+            scaleStepWidth : 10,//Number - The value jump in the hard coded scale       
+            scaleStartValue : 10//Number - The scale starting value
+          };
+
+          
+          var ctx = document.getElementById("myChart").getContext("2d");
+          var myLine = new Chart(ctx, {
+            type: 'line',
+            data: lineChartData,
+            options: options
+          });
+        }
+
+
+      initLine();
+
+
+
+
+    //   var socket = io.connect();
+
+    //   var originDate = new Date();
+
+    //   socket.on('sensorA', function (data) {
+    //     // data.sensorVal is in the form X: ###
+    //     document.getElementById("piezoValA").innerHTML = data.sensorVal;
+    //     var num = parseInt(data.sensorVal.substr(3, data.sensorVal.length - 1));
+
+    //     var timeDiff = new Date() - originDate;
+
+    //   });
+
+    //   socket.on('sensorB', function (data) {
+    //     document.getElementById("piezoValB").innerHTML = data.sensorVal;
+    //     var num = parseInt(data.sensorVal.substr(3, data.sensorVal.length - 1));
+    //   });
+
+
+    </script>
+  </body>
+</html>
