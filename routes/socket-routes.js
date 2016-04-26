@@ -69,6 +69,10 @@ module.exports = function (io) {
       moveMouse();
     });
 
+    socket.on('doActionGrasp', function () {
+      console.log("Doing action Grasp");
+    });
+
   });
 
 
