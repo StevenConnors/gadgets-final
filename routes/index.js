@@ -17,9 +17,14 @@ router.get('/wristgraph', function(req, res, next) {
   res.render('wristGraph', { title: 'WristBand' });
 });
 
-// Renders the demo page, where users can do actions
+// Renders the demo page, where users can see the recognition
 router.get('/demo', function(req, res, next) {
   res.render('demo', { title: 'WristBand' });
+});
+
+// Renders the full demo page, where users can do actions
+router.get('/fulldemo', function(req, res, next) {
+  res.render('fulldemo', { title: 'WristBand' });
 });
 
 module.exports = router;

@@ -6,19 +6,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js"></script>
     <script src="./javascripts/demo.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+      body {
+        font-family: 'Roboto Condensed', sans-serif; font-weight: 700; 
+      }
+
+      h1 {
+        width: auto;
+        height: 280px;
+        margin: auto;
+        padding-top: 140px;
+        text-align: center;
+        border-style: solid;
+        border-width: 10px;
+      }
+
+    </style>
   </head>
   <body>
-
     <p>Welcome to <%= title %> - Demo page</p>
 
-    <div> Here you can see the various actions this device can do</div>
     <br>
-    <div> Left Sensor: Open a bunch of pages </div>
-    <div> Middle Sensor: Type some string</div>
-    <div> Right Sensor: Move mouse </div>
-
-    <br>
-    <h2 id="action"> No actions done yet</h2>
+    <h1 id="action"> No actions done yet</h1>
 
   </body>
 </html>

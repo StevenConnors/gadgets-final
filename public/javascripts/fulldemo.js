@@ -14,6 +14,9 @@ socket.on('sensorC', function (data) {
   checkAllVals();
 });
 
+
+
+
 /** getGesture will return either 0, 1, 2, 3, or 4 depending on 
     the gesture recognized. 
     0: No gesture
@@ -322,18 +325,34 @@ var checkAllVals = function () {
       alerted = true;
       oldGesture = gesture;
       if (gesture == 1) {
+        window.open("http://hcii.cmu.edu");
+        window.open("http://cmu.edu");
+
+        socket.emit('doActionA', { 
+        
+        });
         document.getElementById("action").innerHTML = "Action A was done";
       }
 
       if (gesture == 2) {
+        socket.emit('doActionB', { 
+        
+        });
         document.getElementById("action").innerHTML = "Action B was done";
       }
       
       if (gesture == 3) {
+        socket.emit('doActionC', { 
+        
+        });
         document.getElementById("action").innerHTML = "Action C was done";
       }
 
       if (gesture == 4) {
+        window.open("http://www.google.com/search?q=cute+animal+pictures&safe=active&espv=2&biw=840&bih=956&source=lnms&tbm=isch&sa=X&ved=0ahUKEwio2ISx36vMAhUBET4KHacHBWEQ_AUIBigB");
+        socket.emit('doActionGrasp', {
+
+        });
         document.getElementById("action").innerHTML = "Grasp action was done";
       }
     }
