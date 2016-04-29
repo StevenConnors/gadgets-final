@@ -20,6 +20,6 @@ In order to start the program, connect the bluetooth device to the computer, the
 
 If the serial port does not open, check that you have the correct serialport included within the socket-routes.js file.
 
-Pictures are included in the gadget_images folder, and I will be uploading a video soon.
+Pictures are included in the gadget_images folder, and video is provided at the following link: https://youtu.be/Rzb87XqOabQ.
 
 If you have any questions feel free to contact me.
